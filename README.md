@@ -81,3 +81,9 @@ Contributions, issues, and suggestions are welcome! Open an [issue](https://gith
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+  <b>Made with ❤️ by Skorpion02</b>
+</div>
