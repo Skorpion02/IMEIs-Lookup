@@ -1,60 +1,83 @@
 # IMEIs-Lookup
-Este script carga archivos Excel de pedidos y stock, normaliza columnas, mapea grados, filtra el stock según cantidad y condición de batería, y guarda los resultados en un nuevo archivo Excel. Maneja errores y notifica sobre pedidos no satisfechos.
 
-Filtrado de Datos Completo 2
-Este proyecto está diseñado para procesar y filtrar datos de dos archivos Excel: uno de pedidos y otro de stock. El objetivo es asignar el stock disponible a los pedidos según ciertos criterios y generar un archivo Excel con los resultados.
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/Skorpion02/IMEIs-Lookup?logo=github)](https://github.com/Skorpion02/IMEIs-Lookup/commits/main)
+[![Issues](https://img.shields.io/github/issues/Skorpion02/IMEIs-Lookup?logo=github)](https://github.com/Skorpion02/IMEIs-Lookup/issues)
 
-Funciones Principales
-1. Carga de Archivos Excel
+> **A tool to process and filter order and stock data from Excel files, allocating available stock to orders according to customizable criteria.**
 
-def load_excel_files(pedido_path, stock_path):
+---
 
-"""Carga los archivos Excel de pedido y stock en DataFrames de pandas."""
+## 🚀 Overview
 
-Carga los archivos Excel de pedidos y stock en DataFrames de pandas, manejando posibles errores de lectura.
+This project is designed to process and filter data from two Excel files: one for **orders** and another for **stock**. Its main goal is to assign available stock to orders based on criteria like quantity, battery condition, and product grade.
 
-2. Normalización de Columnas
+---
 
-def normalize_columns(df, column_name):
+## ✨ Main Features
 
-"""Convierte una columna a minúsculas y elimina espacios."""
+- **Excel File Loader:** Reads order and stock files into `pandas.DataFrame`.
+- **Column Normalization:** Standardizes column names (lowercase, no spaces).
+- **Grade Mapping:** Converts grade values (`a`, `b`, `c`) into (`mint`, `good`, `fair`).
+- **Advanced Filtering:** Filters stock based on order requirements for quantity and battery condition, notifies about unfulfilled orders, and calculates total missing units.
+- **Column Selection:** Allows selection of only the necessary columns for the final output.
+- **Export Results:** Saves the result to a new Excel file.
 
-Convierte una columna a minúsculas y elimina espacios para asegurar consistencia en los datos.
+---
 
-3. Mapeo de Grados
+## 🛠️ Usage Example
 
-def map_grades(df, grade_column):
-    """Mapea los valores de grado ('a', 'b', 'c') a ('mint', 'good', 'fair')."""
-    
-Mapea los valores de grado ('a', 'b', 'c') a ('mint', 'good', 'fair') y maneja valores no mapeados.
+```python
+# Load files
+df_order, df_stock = load_excel_files("orders.xlsx", "stock.xlsx")
 
-4. Filtrado por Cantidad y Condición de Batería
+# Normalize columns
+df_order = normalize_columns(df_order, "column_name")
+df_stock = normalize_columns(df_stock, "column_name")
 
-def filter_by_qty_and_battery(df_pedido, df_stock_original):
-    """
-    Filtra el DataFrame de stock basado en los requisitos del DataFrame de pedido,
-    manejando cantidad y condición de batería, notifica sobre pedidos no satisfechos,
-    y calcula el total de unidades faltantes.
-    """
+# Map grades
+df_stock = map_grades(df_stock, "grade_column")
 
-Filtra el stock basado en los requisitos del pedido, manejando cantidad y condición de batería, notificando sobre pedidos no satisfechos y calculando el total de unidades faltantes.
+# Filter by quantity and battery
+result, missing = filter_by_qty_and_battery(df_order, df_stock)
 
-5. Selección de Columnas
+# Select columns and save
+result = select_columns(result, ["col1", "col2", "col3"])
+save_to_excel(result, "results.xlsx")
+```
 
-def select_columns(df, columns):
-    """Selecciona un subconjunto de columnas de un DataFrame."""
+---
 
-Selecciona un subconjunto de columnas de un DataFrame, asegurando que todas las columnas solicitadas existan.
+## 📂 Main Workflow
 
-6. Guardar Resultados en Excel
+1. **Load** the order and stock files.
+2. **Normalize** and **map** the necessary columns.
+3. **Filter** and **assign** stock to orders.
+4. **Save** the results to an Excel file.
 
-def save_to_excel(df, file_name):
-    """Guarda un DataFrame en un archivo Excel."""
+---
 
-Guarda un DataFrame en un archivo Excel, manejando posibles errores durante el proceso.
+## 📋 Requirements
 
-Flujo Principal de Ejecución
-Carga los archivos de pedidos y stock.
-Normaliza y mapea las columnas necesarias.
-Filtra y asigna el stock según los pedidos.
-Guarda los resultados en un archivo Excel.
+- Python 3.9+
+- pandas
+- openpyxl (for Excel support)
+
+Install dependencies with:
+
+```bash
+pip install pandas openpyxl
+```
+
+---
+
+## 🤝 Contributions
+
+Contributions, issues, and suggestions are welcome! Open an [issue](https://github.com/Skorpion02/IMEIs-Lookup/issues) or a pull request.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
